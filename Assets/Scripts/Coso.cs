@@ -7,7 +7,6 @@ public class Coso : MonoBehaviour
     public GameObject arCamera;
     public GameObject[] enemigos;
     RaycastHit hit;
-    public GameObject objeto;
     public GameObject explosion;
     public GameObject proyectil;
     public float velocidadDisparo = 2000.0f;
@@ -36,14 +35,18 @@ public class Coso : MonoBehaviour
 
         // Destruir enemigo
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
-            if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit)) {
+            GameObject nuevaBala = Instantiate(proyectil, arCamera.transform.position, arCamera.transform.rotation) as GameObject;
+            nuevaBala.GetComponent<Rigidbody>().AddForce(arCamera.transform.forward * 2000);
+
+            /*if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit)) {
                 if (hit.transform.tag == "Enemigo") {
                     Destroy(hit.transform.gameObject);
-                    Instantiate(objeto, hit.transform.position, hit.transform.rotation);
+                    Instantiate(explosion, hit.transform.position, hit.transform.rotation);
                 }
-            }
+            }*/
+
         }
-        
+
     }
 
     public void CrearEnemigo() {
