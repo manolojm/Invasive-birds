@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemigo : MonoBehaviour
 {
+
+    public GameObject explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +19,13 @@ public class Enemigo : MonoBehaviour
         
     }
 
-    void CrearEnemigo() {
+    private void OnCollisionEnter(Collision collision) {
+        if (collision.transform.tag == "Plano") {
 
+            Debug.Log("choca");
+            Instantiate(explosion, collision.transform.position, collision.transform.rotation);
+            Destroy(gameObject);
+        }
     }
+
 }
