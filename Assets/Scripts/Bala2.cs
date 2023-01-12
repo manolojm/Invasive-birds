@@ -20,13 +20,13 @@ public class Bala2 : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision) {
-        Debug.Log("prueba");
+        Debug.Log("Disparo acertado");
         
         if (collision.transform.tag == "Enemigo") {
             Destroy(collision.transform.gameObject);
-            Instantiate(explosion, collision.transform.position, collision.transform.rotation);
+            var animExplosion =  Instantiate(explosion, collision.transform.position, collision.transform.rotation);
             Destroy(gameObject.GetComponent<GameObject>());
-            //Destroy(explosion);
+            Destroy(animExplosion, 1);
         }
     }
 }

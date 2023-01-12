@@ -9,7 +9,7 @@ public class Coso : MonoBehaviour
     RaycastHit hit;
     public GameObject explosion;
     public GameObject proyectil;
-    public float velocidadDisparo = 2000.0f;
+    public float velocidadDisparo = 1000.0f;
 
     public float time;
     public float tiempoAleatorio;
@@ -37,6 +37,7 @@ public class Coso : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
             GameObject nuevaBala = Instantiate(proyectil, arCamera.transform.position, arCamera.transform.rotation) as GameObject;
             nuevaBala.GetComponent<Rigidbody>().AddForce(arCamera.transform.forward * 2000);
+            Destroy(nuevaBala, 5);
 
             /*if (Physics.Raycast(arCamera.transform.position, arCamera.transform.forward, out hit)) {
                 if (hit.transform.tag == "Enemigo") {
@@ -46,12 +47,12 @@ public class Coso : MonoBehaviour
             }*/
 
         }
-
     }
 
     public void CrearEnemigo() {
-        Debug.Log("okk2");
+        Debug.Log("Nuevo enemigo");
         Vector3 posicionEnemigo = new Vector3(Random.Range(-5,5), Random.Range(3, 4), Random.Range(3, 8));
-        Instantiate(enemigoAleatorio, posicionEnemigo, Quaternion.identity);
+        var nuevoEnem = Instantiate(enemigoAleatorio, posicionEnemigo, Quaternion.identity);
+        Destroy(nuevoEnem, 10);
     }
 }
