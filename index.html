@@ -1,0 +1,116 @@
+﻿﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Prueba ARJS</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+
+    <!-- <a-scene vr-mode-ui='enabled: false' embedded arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+    <a-camera gps-camera rotation-reader look-controls-enabled='false' arjs-look-controls='smoothingFactor: 0.1'></a-camera> -->
+
+    <a-scene embedded loading-screen="enabled: false;" arjs="sourceType: webcam; debugUIEnabled: false;">
+        <a-camera gps-camera rotation-reader></a-camera>
+    </a-scene>
+  </body>
+
+  <script>
+
+    window.onload = ()=>
+    {
+        cargarModelos();
+    }
+
+    function cargarModelos(){
+        var modelos = [
+            {
+                latitud: 37.192262,
+                longitud: -3.616535,
+                texto: "Monumento 1",
+                imagen: 'videos/monumento.jpg',
+                video: 'videos/suerte.mp4'
+            },
+            {
+                latitud: 37.192246, 
+                longitud: -3.616596,
+                texto: "Monumento 2",
+                imagen: 'videos/monumento.jpg',
+                video: 'videos/suerte.mp4'
+            },
+            {
+                latitud: 37.192249,
+                longitud: -3.616615,
+                //latitud: 37.176995, 
+                //longitud: -3.609922,
+                texto: "Monumento 3",
+                imagen: 'videos/monumento.jpg',
+                video: 'videos/suerte.mp4'
+            },
+            {
+                latitud: 37.192196, 
+                longitud: -3.616572,
+                //latitud: 37.176995, 
+                //longitud: -3.609922,
+                texto: "Monumento 4",
+                imagen: 'videos/monumento.jpg',
+                video: 'videos/suerte.mp4'
+            },
+            {
+                latitud: 37.192235, 
+                longitud: -3.616582,
+                //latitud: 37.176796, 
+                //longitud: -3.609781,
+                texto: "Monumento 5",
+                imagen: 'videos/monumento.jpg',
+                video: 'videos/suerte.mp4'
+            }
+        ];
+
+        // Nuestra escena
+        var scene = document.querySelector('a-scene');
+
+        for (var i = 0; i < modelos.length; i++){
+            
+            // Nuestro texto
+            var texto = document.createElement('a-text');
+            texto.setAttribute('value', `${modelos[i].texto}`);
+            texto.setAttribute('scale', '0.5 0.5 0.5');
+            texto.setAttribute('position', '0 0 -20');
+            texto.setAttribute('gps-entity-place', `latitude: ${modelos[i].latitud}; longitude: ${modelos[i].longitud};`);
+
+            scene.appendChild(texto);
+
+            // Nuestra imagen
+            var imagen = document.createElement('a-image');
+            imagen.setAttribute('src', `${modelos[i].imagen}`);
+            imagen.setAttribute('scale', '0.5 0.5 0.5');
+            imagen.setAttribute('position', '0 0 -20');
+            imagen.setAttribute('gps-entity-place', `latitude: ${modelos[i].latitud}; longitude: ${modelos[i].longitud};`);
+            scene.appendChild(imagen);
+
+            // Nuestro video
+            var video = document.createElement('a-video');
+            video.setAttribute('src', `${modelos[i].video}`);
+            video.setAttribute('scale', '0.5 0.5 0.5');
+            video.setAttribute('position', '0 0 -20');
+            video.setAttribute('gps-entity-place', `latitude: ${modelos[i].latitud}; longitude: ${modelos[i].longitud};`);
+            scene.appendChild(video);
+
+            // Nuestra esfera
+            /*var modelo = document.createElement("a-sphere");
+            modelo.setAttribute('material', 'color:' + "red");
+            modelo.setAttribute('scale', '0.5 0.5 0.5');
+            modelo.setAttribute('gps-entity-place', `latitude: ${modelos[i].latitud}; longitude: ${modelos[i].longitud};`);
+
+            scene.appendChild(modelo);*/
+        }
+    }
+  
+  </script>
+
+</html>
