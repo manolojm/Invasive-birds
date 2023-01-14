@@ -14,9 +14,9 @@ public class Bala : MonoBehaviour
         puntos = 0;
 
         Destroy(collision.transform.gameObject);
-        var animExplosion = Instantiate(explosion, collision.transform.position, collision.transform.rotation);
+        Instantiate(explosion, collision.transform.position, collision.transform.rotation);
         Destroy(gameObject.GetComponent<GameObject>());
-        Destroy(animExplosion, 1);
+        //Destroy(animExplosion, 1);
 
         if (collision.transform.tag == "Enemigo") {
             puntos = 100;
@@ -25,12 +25,5 @@ public class Bala : MonoBehaviour
         }
 
         puntuacion.SumarPuntos(puntos);
-    }
-
-    private void DisparoCertero(Collision collision) {
-        Destroy(collision.transform.gameObject);
-        var animExplosion = Instantiate(explosion, collision.transform.position, collision.transform.rotation);
-        Destroy(gameObject.GetComponent<GameObject>());
-        Destroy(animExplosion, 1);
     }
 }

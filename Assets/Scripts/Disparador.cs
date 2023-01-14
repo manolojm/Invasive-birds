@@ -10,13 +10,14 @@ public class Disparador : MonoBehaviour
     RaycastHit hit;
 
     public GameObject arCamera;
-    public GameObject[] enemigos; 
-    public GameObject explosion;
+    public GameObject[] enemigos;
     public GameObject proyectil;
-    public float velocidadDisparo = 1000.0f;
 
+    public float velocidadDisparo = 1000.0f;
     public float time;
     public float tiempoAleatorio;
+
+    private bool empezarGenerar = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class Disparador : MonoBehaviour
 
         // Crear enemigo
         tiempoAleatorio -= Time.deltaTime;
-        if (tiempoAleatorio <= 0) {
+        if (tiempoAleatorio <= 0 && empezarGenerar) {
             CrearEnemigo();
             tiempoAleatorio = Random.Range(0, 3);
         }
@@ -49,7 +50,15 @@ public class Disparador : MonoBehaviour
         //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
             GameObject nuevaBala = Instantiate(proyectil, arCamera.transform.position, arCamera.transform.rotation) as GameObject;
             nuevaBala.GetComponent<Rigidbody>().AddForce(arCamera.transform.forward * 2000);
-            Destroy(nuevaBala, 5);
+            Destroy(nuevaBala, 3);
         //}
+    }
+
+    public void EmpezarGenerarEnemigos() {
+        empezarGenerar = true;
+    }
+
+    public void AcabarGenerarEnemigos() {
+        empezarGenerar = false;
     }
 }

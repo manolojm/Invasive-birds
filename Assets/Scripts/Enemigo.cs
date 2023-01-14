@@ -11,9 +11,9 @@ public class Enemigo : MonoBehaviour
         if (collision.transform.tag == "Plano") {
 
             Debug.Log("El enemigo ha caído al suelo");
-            var animExplosion = Instantiate(explosion, collision.transform.position, collision.transform.rotation);
+            Instantiate(explosion, collision.transform.position, collision.transform.rotation);
             Destroy(gameObject);
-            Destroy(animExplosion, 1);
+            //Destroy(animExplosion, 1);
         }
     }
 
